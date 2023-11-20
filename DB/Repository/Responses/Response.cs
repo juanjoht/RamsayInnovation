@@ -1,4 +1,5 @@
 ﻿using StudentApp.Api.DB.Models;
+using StudentApp.Api.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ namespace StudentApp.Api.DB.Repository.Responses
 {
     public class Response
     {
-        public Student Student { get; set; }
+        public StudentResponse Student { get; set; }
         public string Error { get; set; }
-        public Response(Student student, string error = null)
+        public Response(StudentResponse student, string error = null)
         {
             Student = student;
             Error = error;

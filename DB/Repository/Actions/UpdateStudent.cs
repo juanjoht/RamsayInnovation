@@ -3,6 +3,7 @@ using MediatR;
 using StudentApp.Api.DB.Data;
 using StudentApp.Api.DB.Repository.Command;
 using StudentApp.Api.DB.Repository.Responses;
+using StudentApp.Api.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,10 +26,11 @@ namespace StudentApp.Api.DB.Repository.Actions
             }
             public async Task<Response> Handle(UpdateCommand request, CancellationToken cancellationToken)
             {
+                var student = _mapper.Map<StudentResponse>(request.Student);
                 var studentExist = await _dataRepo.GetById(request.Student.Id);
                 if (studentExist == null)
                 {
-                    return new Response(request.Student, "No student exists");
+                    return new Response(student, "No student exists");
                 }
                 else
                 {
@@ -37,12 +39,13 @@ namespace StudentApp.Api.DB.Repository.Actions
                     studentExist.Username = request.Student.Username;
                     studentExist.Age = request.Student.Age;
                     studentExist.Career = request.Student.Career;
+                    student = _mapper.Map<StudentResponse>(studentExist);
                 }
                 if (await _dataRepo.Save())
                 {
-                    return new Response(studentExist);
+                    return new Response(student);
                 }
-                return new Response(request.Student, "An error has occurred");
+                return new Response(student, "An error has occurred");
             }
         }
     }

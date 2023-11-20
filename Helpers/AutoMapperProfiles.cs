@@ -1,6 +1,7 @@
 using AutoMapper;
 using StudentApp.Api.DB.Models;
 using StudentApp.Api.Models.Request;
+using StudentApp.Api.Models.Response;
 
 namespace PolizaSeguro.API.Helpers
 {
@@ -10,9 +11,11 @@ namespace PolizaSeguro.API.Helpers
         {
             // Domain to Dto
             CreateMap<Student, StudentRequest>();
+            CreateMap<Student, StudentResponse>();
 
             // Dto to Domain
-            CreateMap<StudentRequest, Student>();        
+            CreateMap<StudentRequest, Student>();
+            CreateMap<StudentResponse,Student>();
         }
     }
 }

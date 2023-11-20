@@ -3,6 +3,7 @@ using MediatR;
 using StudentApp.Api.DB.Data;
 using StudentApp.Api.DB.Repository.Command;
 using StudentApp.Api.DB.Repository.Responses;
+using StudentApp.Api.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,8 @@ namespace StudentApp.Api.DB.Repository.Actions
                 }
                 if (await _dataRepo.Save())
                 {
-                    return new Response(studentExist);
+                    var student = _mapper.Map<StudentResponse>(studentExist);
+                    return new Response(student);
                 }
                 return new Response(null, "An error has occurred");
             }
