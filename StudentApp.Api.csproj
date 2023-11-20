@@ -18,5 +18,9 @@
     <Folder Include="DB\Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="StudentApp.Api.sln" />
+  </ItemGroup>
+
 
 </Project>
